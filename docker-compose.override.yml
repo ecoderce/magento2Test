@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    frontend:
+        volumes:
+            - "nfsmount:/var/www/html"
+    varnish:
+        volumes:
+            - "nfsmount:/var/www/html"
+    backend:
+        volumes:
+            - "nfsmount:/var/www/html"
+    php:
+        volumes:
+            - "nfsmount:/var/www/html"
+
+volumes:
+    nfsmount:
+        driver: local
+        driver_opts:
+            type: nfs
+            o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+            device: ":/System/Volumes/Data/${PWD}"   #device: ":$PWD" #if OSX != Catalina
+
+
+
+
+
